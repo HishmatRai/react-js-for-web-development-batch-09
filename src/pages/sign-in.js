@@ -1,4 +1,5 @@
 import React from "react";
+import { Input, Button } from "../components";
 class SignIn extends React.Component {
     constructor() {
         super();
@@ -36,13 +37,17 @@ class SignIn extends React.Component {
         }
     }
     render() {
+        
         return (
             <div>
                 <h1>Sign In</h1>
-                <input type="email" placeholder="Email Address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
-                <input type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+                <Input type="email" placeholder="Email Address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
+            <Input type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+                {/* <input type="email" placeholder="Email Address" value={this.state.email} onChange={(e) => this.setState({ email: e.target.value })} />
+                <input type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} /> */}
                 <p style={{ color: this.state.messageType === "error" ? "red" : "green" }}>{this.state.message}</p>
-                <button onClick={this.signIn}>Sign In</button>
+                {/* <button onClick={this.signIn}>Sign In</button> */}
+                <Button title="Sign In" onClick={this.signIn}/>
             </div>
         )
     }

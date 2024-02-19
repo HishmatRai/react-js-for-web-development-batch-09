@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import RouterNavigation from "./config/router/router";
+import RouterNavigation from "./config/router";
 const App = () => {
   return (
     <div>
