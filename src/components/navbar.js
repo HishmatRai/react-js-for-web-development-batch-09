@@ -1,7 +1,16 @@
 import React from "react";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from "firebase/auth";
 const Navbar = () => {
-    let navigate = useNavigate()
+    const auth = getAuth();
+    let navigate = useNavigate();
+    const logOutHandler  = ()=>{
+        signOut(auth).then(() => {
+            navigate("/sign-in")
+          }).catch((error) => {
+            // An error happened.
+          });
+    }
     return (
         <div style={{ border: "1px solid red", color: "white" }}>
             {/* <a href="/">Home</a>
@@ -23,6 +32,7 @@ const Navbar = () => {
             <button onClick={() => navigate("/contact-us")}>Contact</button>
             <button onClick={()=> navigate("/sign-up")}>Sign Up</button>
             <button onClick={()=> navigate("/sign-in")}>Sign In</button>
+            <button onClick={logOutHandler}>Log Out</button>
         </div>
     )
 }

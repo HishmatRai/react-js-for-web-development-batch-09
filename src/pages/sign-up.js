@@ -1,27 +1,34 @@
 import React, { useState } from "react";
 import { Input, Button } from "../components";
 import firebase from "../config/firebase";
+import { useNavigate } from 'react-router-dom'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const SignUp = () => {
     const auth = getAuth();
+    const navigate = useNavigate()
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
-
+    const [loading, setLoading] = useState(false)
     const emailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const signUp = () => {
-        setMessageType("error")
+        setMessageType("error");
+        setLoading(true)
         if (fullName === "") {
             // alert("Full name required!")
-            setMessage("Full name required!")
+            setMessage("Full name required!");
+            setLoading(false)
         } else if (email === "") {
             setMessage("Email required!")
+            setLoading(false)
         } else if (!email.match(emailFormat)) {
             setMessage("Please enter vaild email !")
+            setLoading(false)
         } else if (password === "") {
             setMessage("Password required!")
+            setLoading(false)
         } else {
             const user = {
                 fullName: fullName,
@@ -37,12 +44,15 @@ const SignUp = () => {
                     setFullName("");
                     setEmail("");
                     setPassword("");
+                    setLoading(false)
                     setTimeout(() => {
-                        setMessage("")
+                        setMessage("");
+                        navigate("/")
                     }, 2000);
                 })
                 .catch((error) => {
-                    console.log("error>>>>>>>", error)
+                    console.log("error>>>>>>>", error);
+                    setLoading(false)
                 });
 
 
@@ -60,7 +70,7 @@ const SignUp = () => {
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
             <p style={{ color: messageType === "error" ? "red" : "green" }}>{message}</p>
             {/* <button onClick={signUp}>Sign Up</button> */}
-            <Button title="Sign Up" onClick={signUp} />
+            <Button title="Sign Up" loading={loading} onClick={signUp} />
             {/* <button onClick={()=>  signUp()}>Sign Up</button> */}
         </div>
     )
