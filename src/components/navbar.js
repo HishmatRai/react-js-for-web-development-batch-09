@@ -32,6 +32,7 @@ const Navbar = () => {
             <button onClick={() => navigate("/contact-us")}>Contact</button>
             <button onClick={()=> navigate("/sign-up")}>Sign Up</button>
             <button onClick={()=> navigate("/sign-in")}>Sign In</button>
+            <button onClick={()=> navigate("/create-blog")}>Create Blog</button>
             <button onClick={logOutHandler}>Log Out</button>
         </div>
     )
