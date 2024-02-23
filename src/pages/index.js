@@ -4,4 +4,6 @@ import Contact from "./contact";
 import SignUp from "./sign-up";
 import SignIn from "./sign-in";
 import CreateBlog from "./create-blog";
-export { Home, About, Contact, SignUp,SignIn,CreateBlog } 
+import BlogDetails from "./blog-details";
+import PageNotFound from "./page-not-found";
+export { Home, About, Contact, SignUp,SignIn,CreateBlog ,BlogDetails,PageNotFound} 
